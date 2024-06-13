@@ -54,4 +54,11 @@ public class MovieController {
             throw new MovieNotFoundException("Movie with id: " + id + " not found ");
         }
     }
+
+    @GetMapping("/between")
+    public ResponseEntity<List<Movie>> findAllBetweenReleaseYears(
+        @RequestParam int startYear, @RequestParam int endYear) {
+        List<Movie> movies = movieService.findAllBetweenReleaseYears(startYear, endYear);
+        return new ResponseEntity<>(movies, HttpStatus.OK);
+    }
 }
