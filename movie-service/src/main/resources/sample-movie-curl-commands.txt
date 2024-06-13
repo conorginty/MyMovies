@@ -1,0 +1,3 @@
+curl --request POST 'http://localhost:8082/movies' --header 'Content-Type: application/json' --data-raw '{"title": "Inception","genre": "Sci-Fi","director": "Christopher Nolan","releaseYear": 2010}'
+curl --request GET 'http://localhost:8082/movies'
+curl --request GET 'http://localhost:8082/movies/1'
