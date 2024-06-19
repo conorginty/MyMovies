@@ -1,6 +1,9 @@
 package com.mymovies.movie_service.controller;
 
+import com.mymovies.movie_service.TestMovie;
 import com.mymovies.movie_service.model.Movie;
+import com.mymovies.movie_service.repository.MovieRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,9 +22,17 @@ public class MovieControllerIT {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    @Autowired
+    private MovieRepository movieRepository;
+
+    @BeforeEach
+    public void setup() {
+        movieRepository.deleteAll();
+    }
+
     @Test
     public void movie_is_created_successfully() {
-        Movie movie = new Movie();
+        Movie movie = new TestMovie();
 
         ResponseEntity<Movie> response = restTemplate.postForEntity(
             "http://localhost:" + port + "/movies",
@@ -35,7 +46,7 @@ public class MovieControllerIT {
 
     @Test
     public void duplicate_movie_is_not_created() {
-        Movie movie = new Movie(1L, "a", "b", "c", 5);
+        Movie movie = new TestMovie();
 
         ResponseEntity<Movie> response = restTemplate.postForEntity(
             "http://localhost:" + port + "/movies",
@@ -47,7 +58,7 @@ public class MovieControllerIT {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(response.getBody().getId()).isNotNull();
 
-        Movie duplicateMovie = new Movie(1L, "a", "b", "c", 5);
+        Movie duplicateMovie = new TestMovie();
 
         response = restTemplate.postForEntity(
             "http://localhost:" + port + "/movies",

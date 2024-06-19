@@ -28,4 +28,8 @@ public class UserService {
     public void deleteAll() {
         userRepository.deleteAll();
     }
+
+    public Optional<User> getUserById(Long userId) {
+        return userRepository.findById(userId);
+    }
 }

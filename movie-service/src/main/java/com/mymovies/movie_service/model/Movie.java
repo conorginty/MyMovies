@@ -15,9 +15,9 @@ import lombok.NoArgsConstructor;
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String title;
-    private String genre;
-    private String director;
-    private int releaseYear;
+    protected Long id;
+    protected String title;
+    protected String genre;
+    protected String director;
+    protected int releaseYear;
 }

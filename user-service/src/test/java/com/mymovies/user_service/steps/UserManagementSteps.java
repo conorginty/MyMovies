@@ -15,6 +15,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
+import static com.mymovies.user_service.TestConstants.MOVIE_LIST_IDS;
+
 public class UserManagementSteps {
 
     private static final String LOCALHOST = "http://localhost:";
@@ -37,7 +39,7 @@ public class UserManagementSteps {
 
     @When("a unique user with username {string} and password {string} and email {string} is created")
     public void a_user_with_username_and_password_and_email_is_created(String username, String password, String email) {
-        User user = new User(null, username, password, email);
+        User user = new User(null, username, password, email, MOVIE_LIST_IDS);
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<User> entity = new HttpEntity<>(user, headers);
         response = restTemplate.exchange(

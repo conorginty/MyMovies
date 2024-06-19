@@ -18,7 +18,7 @@ public class MovieServiceTest {
     private static final String SOME_TITLE = "some-title";
     private static final String SOME_GENRE = "some-genre";
     private static final String SOME_DIRECTOR = "some-director";
-    private static final int SOME_RELEASE_YEAR = 2000;
+    private static final int SOME_RELEASE_YEAR = 3000;
 
     @Autowired
     private MovieService movieService;
@@ -94,47 +94,47 @@ public class MovieServiceTest {
 
     @Test
     public void test_get_all_movies_by_release_year() {
-        int twentyTen = 2010;
-        Movie movie1 = new Movie(1L, SOME_TITLE, SOME_GENRE, SOME_DIRECTOR, twentyTen);
-        int twentyTwentyThree = 2023;
-        Movie movie2 = new Movie(2L, SOME_TITLE, SOME_GENRE, SOME_DIRECTOR, twentyTwentyThree);
-        Movie movie3 = new Movie(3L, SOME_TITLE, SOME_GENRE, SOME_DIRECTOR, twentyTen);
+        int thirtyTen = 3010;
+        Movie movie1 = new Movie(1L, SOME_TITLE, SOME_GENRE, SOME_DIRECTOR, thirtyTen);
+        int thirtyTwentyThree = 3023;
+        Movie movie2 = new Movie(2L, SOME_TITLE, SOME_GENRE, SOME_DIRECTOR, thirtyTwentyThree);
+        Movie movie3 = new Movie(3L, SOME_TITLE, SOME_GENRE, SOME_DIRECTOR, thirtyTen);
 
         movieService.save(movie1);
         movieService.save(movie2);
         movieService.save(movie3);
 
-        List<Movie> moviesByReleaseYear_2010 = movieService.findAllByReleaseYear(twentyTen);
+        List<Movie> moviesByReleaseYear_3010 = movieService.findAllByReleaseYear(thirtyTen);
 
-        List<Movie> moviesReleasedIn_2010 = List.of(movie1, movie3);
+        List<Movie> moviesReleasedIn_3010 = List.of(movie1, movie3);
 
-        assertThat(moviesByReleaseYear_2010).hasSize(moviesReleasedIn_2010.size());
-        assertThat(moviesByReleaseYear_2010).containsAll(moviesReleasedIn_2010);
-        assertThat(moviesByReleaseYear_2010).doesNotContain(movie2);
+        assertThat(moviesByReleaseYear_3010).hasSize(moviesReleasedIn_3010.size());
+        assertThat(moviesByReleaseYear_3010).containsAll(moviesReleasedIn_3010);
+        assertThat(moviesByReleaseYear_3010).doesNotContain(movie2);
     }
 
     @Test
     public void test_get_all_movies_between_release_years_inclusive() {
-        int year1 = 2000;
+        int year1 = 3000;
         Movie movie1 = new Movie(1L, SOME_TITLE, SOME_GENRE, SOME_DIRECTOR, year1);
-        int year2 = 2002;
+        int year2 = 3002;
         Movie movie2 = new Movie(2L, SOME_TITLE, SOME_GENRE, SOME_DIRECTOR, year2);
-        int year3 = 2004;
+        int year3 = 3004;
         Movie movie3 = new Movie(3L, SOME_TITLE, SOME_GENRE, SOME_DIRECTOR, year3);
 
         movieService.save(movie1);
         movieService.save(movie2);
         movieService.save(movie3);
 
-        List<Movie> moviesReleasedBetween_2000_and_2003 = movieService.findAllBetweenReleaseYears(year1, 2003);
+        List<Movie> moviesReleasedBetween_3000_and_3003 = movieService.findAllBetweenReleaseYears(year1, 3003);
 
-        assertThat(moviesReleasedBetween_2000_and_2003).hasSize(2);
-        assertThat(moviesReleasedBetween_2000_and_2003).contains(movie1, movie2);
-        assertThat(moviesReleasedBetween_2000_and_2003).doesNotContain(movie3);
+        assertThat(moviesReleasedBetween_3000_and_3003).hasSize(2);
+        assertThat(moviesReleasedBetween_3000_and_3003).contains(movie1, movie2);
+        assertThat(moviesReleasedBetween_3000_and_3003).doesNotContain(movie3);
 
-        List<Movie> moviesReleasedBetween_2000_and_2004 = movieService.findAllBetweenReleaseYears(year1, year3);
+        List<Movie> moviesReleasedBetween_3000_and_3004 = movieService.findAllBetweenReleaseYears(year1, year3);
 
-        assertThat(moviesReleasedBetween_2000_and_2004).hasSize(3);
-        assertThat(moviesReleasedBetween_2000_and_2004).contains(movie1, movie2, movie3);
+        assertThat(moviesReleasedBetween_3000_and_3004).hasSize(3);
+        assertThat(moviesReleasedBetween_3000_and_3004).contains(movie1, movie2, movie3);
     }
 }

@@ -17,7 +17,7 @@ import java.util.Optional;
 public class MovieController {
 
     @Autowired
-    MovieService movieService;
+    private MovieService movieService;
 
     @GetMapping
     public List<Movie> getAllMovies() {

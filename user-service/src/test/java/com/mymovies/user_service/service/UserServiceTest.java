@@ -26,7 +26,7 @@ public class UserServiceTest {
 
     @Test
     void user_is_saved() {
-        User user = new User(ID, USERNAME, PASSWORD, EMAIL);
+        User user = new User(ID, USERNAME, PASSWORD, EMAIL, MOVIE_LIST_IDS);
         when(userRepository.save(user)).thenReturn(user);
         User savedUser = userService.saveUser(user);
 
@@ -36,7 +36,7 @@ public class UserServiceTest {
 
     @Test
     void user_is_retrieved_by_username() {
-        when(userRepository.findByUsername(USERNAME)).thenReturn(Optional.of(new User(ID, USERNAME, PASSWORD, EMAIL)));
+        when(userRepository.findByUsername(USERNAME)).thenReturn(Optional.of(new User(ID, USERNAME, PASSWORD, EMAIL, MOVIE_LIST_IDS)));
         User foundUser = userService.getUserByUsername(USERNAME).get();
 
         assertThat(foundUser).isNotNull();

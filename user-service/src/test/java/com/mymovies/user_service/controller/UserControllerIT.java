@@ -35,7 +35,7 @@ public class UserControllerIT {
 
     @Test
     void user_is_created_successfully() {
-        User user = new User(null, USERNAME, PASSWORD, EMAIL);
+        User user = new User(null, USERNAME, PASSWORD, EMAIL, MOVIE_LIST_IDS);
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<User> entity = new HttpEntity<>(user, headers);
         ResponseEntity<User> response = restTemplate.exchange(
@@ -51,7 +51,7 @@ public class UserControllerIT {
 
     @Test
     void given_existing_user_then_retrieved_successfully_by_username() {
-        User user = new User(null, USERNAME, PASSWORD, EMAIL);
+        User user = new User(null, USERNAME, PASSWORD, EMAIL, MOVIE_LIST_IDS);
         userRepository.save(user);
         User foundUser = restTemplate.getForObject("http://localhost:" + port + "/users/" + USERNAME, User.class);
 

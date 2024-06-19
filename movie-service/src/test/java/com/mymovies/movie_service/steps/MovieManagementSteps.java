@@ -32,6 +32,8 @@ public class MovieManagementSteps {
             Movie movie = new Movie();
             movie.setTitle(movieData.get("title"));
             movie.setReleaseYear(Integer.parseInt(movieData.get("releaseYear")));
+            movie.setGenre("some genre");
+            movie.setDirector("some director");
             movieRepository.save(movie);
         }
     }

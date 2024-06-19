@@ -1,4 +1,4 @@
-package com.mymovies.user_service;
+package com.mymovies.movie_list_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +6,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableFeignClients
-public class UserServiceApplication {
+public class MovieListServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UserServiceApplication.class, args);
+		SpringApplication.run(MovieListServiceApplication.class, args);
 	}
 
 }

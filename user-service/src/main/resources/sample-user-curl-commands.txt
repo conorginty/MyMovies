@@ -1,0 +1,7 @@
+curl -X GET http://localhost:8081/users
+curl -X POST --header "Content-Type: application/json" --data '{"username":"test", "password":"pass", "email":"email"}' http://localhost:8081/users
+curl -X GET http://localhost:8081/users/user-a
+
+curl -X GET "http://localhost:8081/users/movie-lists/1"
+curl -X POST "http://localhost:8081/users/movie-lists/create?userId=1&name=Favorites"
+curl -X POST "http://localhost:8081/users/movie-lists/create?userId=1&name=Favorites%20For%20Me"

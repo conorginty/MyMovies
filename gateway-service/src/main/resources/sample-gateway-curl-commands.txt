@@ -1,0 +1,22 @@
+# User Service
+curl -X GET http://localhost:8080/users
+curl -X POST --header "Content-Type: application/json" --data '{"username":"test", "password":"pass", "email":"email"}' http://localhost:8080/users
+curl -X GET http://localhost:8080/users/user-a
+curl -X GET "http://localhost:8080/users/movie-lists/1"
+curl -X POST "http://localhost:8080/users/movie-lists/create?userId=1&name=Favorites"
+curl -X POST "http://localhost:8080/users/movie-lists/create?userId=1&name=Favorites%20For%20Me"
+
+# Movie Service
+curl -X GET 'http://localhost:8080/movies'
+curl -X POST 'http://localhost:8080/movies' --header 'Content-Type: application/json' --data-raw '{"title": "Inception","genre": "Sci-Fi","director": "Christopher Nolan","releaseYear": 2010}'
+curl -X POST 'http://localhost:8080/movies' --header 'Content-Type: application/json' --data-raw '{"title": "Another Movie","genre": "Sci-Fi","director": "Christopher Nolan","releaseYear": 2010}'
+curl -X GET 'http://localhost:8080/movies/1'
+curl -X GET "http://localhost:8080/movies/between?startYear=2000&endYear=2005" -H "accept: application/json"
+
+# Movie List Service
+curl -X GET 'http://localhost:8080/movie-lists'
+curl -X POST 'http://localhost:8080/movie-lists/new/testName'
+curl -X GET 'http://localhost:8080/movie-lists/1'
+curl -X POST 'http://localhost:8080/movie-lists/add?movieListId=1&movieId=3'
+curl -X GET 'http://localhost:8080/movie-lists/users/1'
+curl -X POST 'http://localhost:8080/movie-lists/users/create?userId=1&name=SomeMovieListName'
