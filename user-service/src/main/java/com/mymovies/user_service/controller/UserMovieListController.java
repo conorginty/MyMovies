@@ -1,5 +1,6 @@
 package com.mymovies.user_service.controller;
 
+import com.mymovies.user_service.exception.UserNotFoundException;
 import com.mymovies.user_service.feign.MovieListServiceClient;
 import com.mymovies.user_service.model.MovieList;
 import com.mymovies.user_service.model.User;
@@ -62,11 +63,11 @@ public class UserMovieListController {
     @DeleteMapping("user/{userId}/delete-movie/{movieId}/from-movie-list/{movieListId}")
     public ResponseEntity<User> deleteFromMovieList(@PathVariable Long movieListId,
                                                     @PathVariable Long userId,
-                                                    @PathVariable Long movieId) throws Exception {
+                                                    @PathVariable Long movieId) {
 
         Optional<User> optionalUser = userService.getById(userId);
         if (optionalUser.isEmpty()) {
-            throw new Exception("User with ID: " + userId + " not found.");
+            throw new UserNotFoundException("User with ID: " + userId + " not found.");
         }
 
         movieListServiceClient.deleteMovieFromMovieList(movieListId, movieId);

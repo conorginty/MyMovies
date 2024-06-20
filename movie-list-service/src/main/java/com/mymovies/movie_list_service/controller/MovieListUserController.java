@@ -1,5 +1,6 @@
 package com.mymovies.movie_list_service.controller;
 
+import com.mymovies.movie_list_service.exception.MovieListNotFoundException;
 import com.mymovies.movie_list_service.feign.MovieServiceClient;
 import com.mymovies.movie_list_service.model.MovieList;
 import com.mymovies.movie_list_service.service.MovieListService;
@@ -40,10 +41,10 @@ public class MovieListUserController {
 
     @PostMapping("/add/{movieId}/to/{movieListId}")
     MovieList addMovieToMovieList(@PathVariable Long movieListId,
-                                  @PathVariable Long movieId) throws Exception {
+                                  @PathVariable Long movieId) {
         Optional<MovieList> optionalMovieList = movieListService.findById(movieListId);
         if (optionalMovieList.isEmpty()) {
-            throw new Exception("Movie List with ID: " + movieListId + " does not exist.");
+            throw new MovieListNotFoundException("Movie List with ID: " + movieListId + " does not exist.");
         }
 
         movieServiceClient.getMovie(movieId);
@@ -56,10 +57,10 @@ public class MovieListUserController {
 
     @PostMapping("/delete/{movieId}/from/{movieListId}")
     MovieList deleteMovieFromMovieList(@PathVariable Long movieListId,
-                                       @PathVariable Long movieId) throws Exception {
+                                       @PathVariable Long movieId) {
         Optional<MovieList> optionalMovieList = movieListService.findById(movieListId);
         if (optionalMovieList.isEmpty()) {
-            throw new Exception("Movie List with ID: " + movieListId + " does not exist.");
+            throw new MovieListNotFoundException("Movie List with ID: " + movieListId + " does not exist.");
         }
 
         movieServiceClient.getMovie(movieId);
@@ -72,7 +73,7 @@ public class MovieListUserController {
 
     @GetMapping("/{userId}/get-movie-ids/{movieListId}")
     Set<Long> getMovieIdsFromMovieList(@PathVariable Long userId,
-                                       @PathVariable Long movieListId) throws Exception {
+                                       @PathVariable Long movieListId) {
         List<MovieList> movieListsByUserId = movieListService.findByUserId(userId);
         Optional<MovieList> optionalMovieList =
             movieListsByUserId.stream()
@@ -80,7 +81,7 @@ public class MovieListUserController {
             .findFirst();
 
         if (optionalMovieList.isEmpty()) {
-            throw new Exception("Movie List with ID: " + movieListId + " does not exist");
+            throw new MovieListNotFoundException("Movie List with ID: " + movieListId + " does not exist");
         }
 
         return optionalMovieList.get().getMovieIds();

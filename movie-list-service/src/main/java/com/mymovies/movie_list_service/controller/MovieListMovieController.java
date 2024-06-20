@@ -1,5 +1,6 @@
 package com.mymovies.movie_list_service.controller;
 
+import com.mymovies.movie_list_service.exception.MovieListNotFoundException;
 import com.mymovies.movie_list_service.feign.MovieServiceClient;
 import com.mymovies.movie_list_service.model.Movie;
 import com.mymovies.movie_list_service.model.MovieList;
@@ -24,11 +25,11 @@ public class MovieListMovieController {
 
     @PostMapping("/add")
     public ResponseEntity<MovieList> addToMovieList(@RequestParam Long movieListId,
-                                                    @RequestParam Long movieId) throws Exception {
+                                                    @RequestParam Long movieId) throws MovieListNotFoundException {
         Optional<MovieList> optionalMovieList = movieListService.findById(movieListId);
 
         if (optionalMovieList.isEmpty()) {
-            throw new Exception("Movie List not found");
+            throw new MovieListNotFoundException("Movie List with ID: " + movieListId + " not found");
         }
 
         MovieList movieList = optionalMovieList.get();
@@ -40,10 +41,10 @@ public class MovieListMovieController {
     }
 
     @GetMapping("/{movieListId}")
-    public ResponseEntity<Set<Long>> getMovieIds(@PathVariable Long movieListId) throws Exception {
+    public ResponseEntity<Set<Long>> getMovieIds(@PathVariable Long movieListId) throws MovieListNotFoundException {
         Optional<MovieList> optionalMovieList = movieListService.findById(movieListId);
         if (optionalMovieList.isEmpty()) {
-            throw new Exception("Movie List with ID: " + movieListId + " not found");
+            throw new MovieListNotFoundException("Movie List with ID: " + movieListId + " not found");
         }
 
         Set<Long> movieIds = optionalMovieList.get().getMovieIds();

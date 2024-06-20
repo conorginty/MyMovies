@@ -8,11 +8,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 @CucumberContextConfiguration
 @SpringBootTest
-public class CucumberSpringConfig {
+public class MovieListCucumberSpringConfig {
     @MockBean
     public MovieListService movieListService;
     @MockBean
     public MovieServiceClient movieServiceClient;
 }
-
-
