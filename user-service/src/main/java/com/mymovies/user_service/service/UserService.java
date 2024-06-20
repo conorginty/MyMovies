@@ -1,5 +1,7 @@
 package com.mymovies.user_service.service;
 
+import com.mymovies.user_service.feign.MovieListServiceClient;
+import com.mymovies.user_service.model.MovieList;
 import com.mymovies.user_service.model.User;
 import com.mymovies.user_service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,9 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private MovieListServiceClient movieListServiceClient;
 
     public User saveUser(User user) {
         return userRepository.save(user);
@@ -29,7 +34,11 @@ public class UserService {
         userRepository.deleteAll();
     }
 
-    public Optional<User> getUserById(Long userId) {
+    public Optional<User> getById(Long userId) {
         return userRepository.findById(userId);
+    }
+
+    public MovieList createMovieList(Long userId, String name) {
+        return movieListServiceClient.createMovieList(userId, name);
     }
 }

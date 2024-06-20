@@ -45,13 +45,13 @@ public class MovieController {
                 currentMovie.getReleaseYear() == movie.getReleaseYear();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Movie> getMovieById(@PathVariable Long id) throws MovieNotFoundException {
-        Optional<Movie> movieOptional = movieService.findById(id);
+    @GetMapping("/{movieId}")
+    public ResponseEntity<Movie> getMovieById(@PathVariable Long movieId) throws MovieNotFoundException {
+        Optional<Movie> movieOptional = movieService.findById(movieId);
         if (movieOptional.isPresent()) {
             return new ResponseEntity<>(movieOptional.get(), HttpStatus.OK);
         } else {
-            throw new MovieNotFoundException("Movie with id: " + id + " not found ");
+            throw new MovieNotFoundException("Movie with id: " + movieId + " not found ");
         }
     }
 

@@ -6,7 +6,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -16,6 +15,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
 import static com.mymovies.user_service.TestConstants.MOVIE_LIST_IDS;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class UserManagementSteps {
 
@@ -49,10 +50,10 @@ public class UserManagementSteps {
 
     @Then("the user is created successfully with the correct details")
     public void the_user_is_created_successfully_with_the_correct_details() {
-        Assertions.assertNotNull(response.getBody());
-        Assertions.assertEquals(EXPECTED_USERNAME, response.getBody().getUsername());
-        Assertions.assertEquals(EXPECTED_PASSWORD, response.getBody().getPassword());
-        Assertions.assertEquals(EXPECTED_EMAIL, response.getBody().getEmail());
+        assertNotNull(response.getBody());
+        assertEquals(EXPECTED_USERNAME, response.getBody().getUsername());
+        assertEquals(EXPECTED_PASSWORD, response.getBody().getPassword());
+        assertEquals(EXPECTED_EMAIL, response.getBody().getEmail());
     }
 
     @When("the user with username {string} is retrieved")
@@ -64,9 +65,9 @@ public class UserManagementSteps {
 
     @Then("the user details are returned successfully")
     public void the_user_details_are_returned_successfully() {
-        Assertions.assertNotNull(response.getBody());
-        Assertions.assertEquals(EXPECTED_USERNAME, response.getBody().getUsername());
-        Assertions.assertEquals(EXPECTED_PASSWORD, response.getBody().getPassword());
-        Assertions.assertEquals(EXPECTED_EMAIL, response.getBody().getEmail());
+        assertNotNull(response.getBody());
+        assertEquals(EXPECTED_USERNAME, response.getBody().getUsername());
+        assertEquals(EXPECTED_PASSWORD, response.getBody().getPassword());
+        assertEquals(EXPECTED_EMAIL, response.getBody().getEmail());
     }
 }

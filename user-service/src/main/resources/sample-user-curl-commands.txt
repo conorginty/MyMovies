@@ -5,3 +5,7 @@ curl -X GET http://localhost:8081/users/user-a
 curl -X GET "http://localhost:8081/users/movie-lists/1"
 curl -X POST "http://localhost:8081/users/movie-lists/create?userId=1&name=Favorites"
 curl -X POST "http://localhost:8081/users/movie-lists/create?userId=1&name=Favorites%20For%20Me"
+curl -X POST "http://localhost:8081/users/movie-lists/user/1/add-movie/13/to-movie-list/1"
+curl -X GET "http://localhost:8081/users/movie-lists/1/get-movies/1"
+
+curl -X DELETE "http://localhost:8081/users/movie-lists/user/1/delete-movie/13/from-movie-list/1"

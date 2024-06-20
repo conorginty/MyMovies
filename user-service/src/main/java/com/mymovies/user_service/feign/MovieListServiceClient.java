@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Set;
 
 @FeignClient(name = "movie-list-service", path = "/movie-lists/users")
 public interface MovieListServiceClient {
@@ -17,4 +18,16 @@ public interface MovieListServiceClient {
 
     @PostMapping("/create")
     MovieList createMovieList(@RequestParam Long userId, @RequestParam String name);
+
+    @PostMapping("/add/{movieId}/to/{movieListId}")
+    MovieList addMovieToMovieList(@PathVariable Long movieListId,
+                                  @PathVariable Long movieId);
+
+    @PostMapping("/delete/{movieId}/from/{movieListId}")
+    MovieList deleteMovieFromMovieList(@PathVariable Long movieListId,
+                                       @PathVariable Long movieId);
+
+    @GetMapping("/{userId}/get-movie-ids/{movieListId}")
+    Set<Long> getMovieIdsFromMovieList(@PathVariable Long userId,
+                                       @PathVariable Long movieListId);
 }
